@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+      
+      <h:head><title>Kreiranje novog zadatka</title></h:head>
+	<h:body>
+		<h:form id="newTaskForm">
+		
+		<p:commandButton action="#{logoutController.logout}" value="Odjava" immediate="true"/>
+		
+		<!-- http://stackoverflow.com/questions/14101380/force-jsf-to-refresh-page-view-form-when-opened-via-link-or-back-button -->
+		<!--  <f:event type="preRenderView" listener="#{facesContext.externalContext.response.setHeader('Cache-Control', 'no-cache, no-store')}" /> -->
+
+        <p:panel header="Kreiranje zadatka">
+        <h:panelGrid columns="3">
+        	
+        	<p:outputLabel for="user" value="Korisnik: "/>
+        	<p:selectOneMenu id="user" value="#{createTaskController.user}" 
+			required="true" style="width:300px" converter="#{userConverterBean}">
+			<f:selectItem itemLabel="Odaberite korisnika" itemValue=""/>
+			<f:selectItems value="#{createTaskController.userList}" var="userItem"
+			itemLabel="#{userItem.userFirstName} #{userItem.userLastName}" itemValue="#{userItem}"/>
+			</p:selectOneMenu>
+			<p:message for="user"/>
+			
+			<p:outputLabel for="project" value="Projekt "/>
+			<p:selectOneMenu id="project" value="#{createTaskController.project}" 
+			required="true" style="width:300px" converter="#{projectConverterBean}">
+			<f:selectItem itemLabel="Odaberite projekt" itemValue=""/>
+			<f:selectItems value="#{createTaskController.projectList}" var="projectItem"
+			itemLabel="#{projectItem.projectName}" itemValue="#{projectItem}"/>
+			</p:selectOneMenu>
+			<p:message for="project"/>
+			
+			<p:outputLabel for="taskDescription" value="Opis zadatka "/>
+			<p:inputTextarea id="taskDescription" rows="4" cols="20" value="#{createTaskController.taskDescription}"
+			required="true" style="width:300px"/>
+			<p:message for="taskDescription"/>
+			
+			<p:outputLabel for="estimatedTime" value="Procjena (h) "/>
+			<p:selectOneMenu id="estimatedTime" value="#{createTaskController.estimatedTime}" 
+			required="true" style="width:300px" converter="#{estimatedTimeConverterBean}">
+			<f:selectItem itemLabel="Unesite procjenu (h)" itemValue=""/>
+			<f:selectItems value="#{createTaskController.estimatedTimeList}" var="timeItem"
+			itemLabel="#{timeItem}" itemValue="#{timeItem}"/>
+			</p:selectOneMenu>
+			<p:message for="estimatedTime"/>
+		
+			<p:commandButton action="#{createTaskController.saveTask}" value="Spremi zadatak" update="newTaskForm"/>
+			
+        </h:panelGrid>
+        
+        </p:panel>
+
+		</h:form>
+	</h:body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+     <f:view locale="#{language.localeCode}" >
+      <h:head></h:head>
+	<h:body>
+	
+
+		<h:form id="loginForm" action="j_security_check" method="post">
+			<table align="center">
+			<c:if test='${not empty param["login_error"]}'>
+ 				<tr>
+  					<td style='color: red' colspan='2' align='center'><b><h:outputText value="#{msg['error.message']}"/></b></td>
+ 				</tr>
+ 				<tr>
+  					<td>&nbsp;</td>
+ 				</tr>
+			</c:if>
+				<tr>
+				<td><h:outputText value="#{msg['loginPage.username']}"/> </td>
+					<td><input type="text" name="j_username" maxlength="22"/></td>
+				</tr>
+				<tr>
+					<td><h:outputText value="#{msg['loginPage.password']}"/> </td>
+					<td><input type="password" name="j_password" maxlength="22"/></td>
+				</tr>
+				<tr>
+					<td colspan="2"><input type="submit" value="#{msg['loginPage.btnSubmit']}"/></td>
+				</tr>
+			
+			</table>
+			<h:commandLink value="#{msg['button.croatian']}" action="#{language.changeLang('hr')}" immediate="true"/>
+			<h:commandLink value="#{msg['button.english']}" action="#{language.changeLang('en')}" immediate="true"/>
+			<h:commandLink value="#{msg['button.german']}" action="#{language.changeLang('de')}" immediate="true"/>
+			<!--  <ui:include src="/jsf/language.xhtml"/> -->
+			
+		</h:form>
+		
+	<!--  	<h:link value="#{msg['button.croatian']}" action="#{language.changeLang('hr')}" immediate="true"/>
+		<h:link value="#{msg['button.english']}" action="#{language.changeLang('hr')}" immediate="true"/>
+		<h:link value="#{msg['button.german']}" action="#{language.changeLang('hr')}" immediate="true"/> -->
+
+	</h:body>
+</f:view>
+</html>

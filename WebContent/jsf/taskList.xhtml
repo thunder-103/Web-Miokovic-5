@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+      
+     <h:head><title>Prikaz zadataka</title></h:head>
+	<h:body>
+
+	
+	<p:dataTable var="task" rowIndexVar="taskNumber" 
+	value="#{displayTaskController.taskList}" paginator="true" rows="10" 
+	paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} 
+	{LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15">
+
+	
+	<p:column>
+		<f:facet name="header">Ime</f:facet> 
+    	<h:outputText value="#{task.user.userFirstName}" />
+    </p:column>
+    
+    <p:column>
+    	<f:facet name="header">Prezime</f:facet>
+    	<h:outputText value="#{task.user.userLastName}" />
+    </p:column>
+    
+    <p:column>
+    	<f:facet name="header">Korisničko ime</f:facet>
+    	<h:outputText value="#{task.user.userName}" />
+    </p:column>
+    
+    <p:column>
+    	<f:facet name="header">Naziv projekta</f:facet>
+    	<h:outputText value="#{task.project.projectName}" />
+    </p:column>
+    
+    <p:column>
+    	<f:facet name="header">Naziv tvrtke</f:facet>
+    	<h:outputText value="#{task.project.projectCompany}" />
+    </p:column>
+    
+    <p:column>
+    	<f:facet name="header">Opis zadatka</f:facet>
+    	<h:outputText value="#{task.taskDescription}" />
+    </p:column>
+    
+    <p:column>
+    	<f:facet name="header">Procjena (h)</f:facet>
+    	<h:outputText value="#{task.estimatedTime}" />
+    </p:column>
+
+	</p:dataTable>
+	
+	<h:form>
+		
+		<p:commandButton action="#{createTaskController.backButton}" value="Povratak"/>
+		
+	</h:form>
+		
+	</h:body>
+</html>
